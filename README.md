@@ -30,9 +30,9 @@
   * A black peg does **not** indicate _which_ peg position is correct, only that there is a peg in the guess that is correct.
   * If a peg in the guess matches in color only (not in the correct position), the computer places one white peg in the response area
   
-##### Example
+##### Example (continued
 
-  * Computer response: :black_medium_small_square:, :white_medium_small_square:, :white_medium_small_square:
+  * Computer response: :black_medium_small_square: :white_medium_small_square: :white_medium_small_square:
   
 ##### NOTE: 
 Because of the possibility of multiple uses of a single color in both the code and the guess, the following example should make clear the rules for the computer's response in such cases.
@@ -45,4 +45,3 @@ For example ([paraphrased](https://en.wikipedia.org/wiki/Mastermind_(board_game)
   * The game ends when either
     * **WIN:** the player guesses the correct code
     * **LOSE:** M incorrect guesses have been made
-    * The 
