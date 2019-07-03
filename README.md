@@ -1,5 +1,7 @@
 # MasterMind
 
+![Vintage game board](images/MasterMindBoard.jpg)
+
 ### Summary of the Game
 
 #### 1. The computer chooses a "code"
