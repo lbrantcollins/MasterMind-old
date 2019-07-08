@@ -46,26 +46,32 @@ const game = {
 			if (this.guess[i] === this.code[i]) {
 				this.blackPegs++;
 				this.response[i] = 2;
-				// console.log(`i = ${i}: one more black peg`);
 			} else 
 
 			// Look for correct color-only matches
 			if (this.code.includes(this.guess[i])) {
 				this.whitePegs++;
 				this.response[i] = 1;
-				// console.log(`i = ${i}: one more white peg`);
 			}			
 		}
-		// sort response in descending order
+		// sort response in descending order for ease of output
 		// 2 = black, 1 = white, 0 = no response
 		this.response.sort( function(a, b) { return b - a } );  
-		console.log("black pegs: " + this.blackPegs);
-		console.log("white pegs: " + this.whitePegs);
 		console.log("the response: ", this.response);
+
 	}
 
 }
 
+//*************************************************************************
 game.startGame();
+//*************************************************************************
+
+
+//*************************************************************************
+// Event listeners
+//*************************************************************************
+
+
 
 

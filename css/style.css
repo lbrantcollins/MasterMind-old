@@ -1,3 +1,40 @@
 body {
 	background-color: lavender;
 }
+
+.guess-row {
+	display: flex;
+}
+
+.container {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 200px;
+	height: 100px;
+	background-color: bisque;
+}
+
+.colors {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 30px;
+	height: 30px;
+}
+
+#peg1 {
+	background-color: red;
+}
+
+#peg2 {
+	background-color: blue;
+}
+
+#peg3 {
+	background-color: green;
+}
+
+#peg4 {
+	background-color: orange;
+}
