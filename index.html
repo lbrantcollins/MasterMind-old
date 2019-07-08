@@ -8,14 +8,38 @@
 </head>
 <body>
 
-	<div class="rows">
-		<div class="guess">
-		</div>
-		<div class="response">
+	<div id="game-board-container">
+		Here is the board container
+		<div id="row-container">
+			Here is the row container
+			<div class="one-row" id="row10">row 10</div>
+			<div class="one-row" id="row9">row 9</div>
+			<div class="one-row" id="row8">row 8</div>
+			<div class="one-row" id="row7">row 7</div>
+			<div class="one-row" id="row6">row 6</div>
+			<div class="one-row" id="row5">row 5</div>
+			<div class="one-row" id="row4">row 4</div>
+			<div class="one-row" id="row3">row 3</div>
+			<div class="one-row" id="row2">row 2</div>
+			<div class="one-row" id="row1">row 1
+				<div class="response">
+					response 1
+				</div>
+				<div class="guess">
+					<div class="colors" id="guess1">1</div>
+					<div class="colors" id="guess2">2</div>
+					<div class="colors" id="guess3">3</div>
+					<div class="colors" id="guess4">4</div>
+				</div>
+			</div>
+			
+			
+			
 		</div>
 	</div>
 
-	<div class="container">
+	<div id="color-container">
+		<!--  These divs will be generated via jQuery at the start of the game -->
 		<div class="colors" id="peg1">1</div>
 		<div class="colors" id="peg2">2</div>
 		<div class="colors" id="peg3">3</div>

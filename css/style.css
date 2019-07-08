@@ -2,16 +2,73 @@ body {
 	background-color: lavender;
 }
 
-.guess-row {
-	display: flex;
+#game-board-container {
+	position: relative;
+	width: 500px;
+	height: 500px;
+	background-color: lightsteelblue;
 }
 
-.container {
+#row-container {
+	background-color: orange;
+	width: 85%;
+	height: 90%; 
+	/* center horizontally */
+  	margin: auto 7.5%;
+	/* center vertically */		
+	position: absolute;
+   top: 50%;
+  	transform: translateY(-50%);
+}
+
+.one-row {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	width: 200px;
-	height: 100px;
+}
+
+.guess {
+	background-color: lightblue;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 170px;
+	height: 50px;
+}
+
+/* The CSS for the available game colors will 
+be generated via jQuery at the start of the game */
+#guess1 {
+	background-color: red;
+}
+
+#guess2 {
+	background-color: blue;
+}
+
+#guess3 {
+	background-color: green;
+}
+
+#guess4 {
+	background-color: orange;
+}
+
+.response {
+	background-color: lightgrey;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+
+#color-container {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: 10px 65px;
+	width: 170px;
+	height: 50px;
 	background-color: bisque;
 }
 
@@ -21,8 +78,11 @@ body {
 	align-items: center;
 	width: 30px;
 	height: 30px;
+	border-radius: 15px;
 }
 
+/* The CSS for the available game colors will 
+be generated via jQuery at the start of the game */
 #peg1 {
 	background-color: red;
 }
