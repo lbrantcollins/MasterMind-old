@@ -5,14 +5,11 @@
 #### 1. Player enters their name (and chooses difficulty level)
 
   * The name allows for a personalized welcome to the game
-  * **Forthcoming feature: **  The level of difficulty is determined by the number of available colors the player would like to play with (4, 6, or 8).
-    * The MVP will be written with 4 available colors and no option to choose otherwise.  Thus, the complete board will appear on the screen before the start of the game.
-    
+
 #### 2. Computer choose a code at random
 
   * Since colors can be re-used in the code, each of the four positions may be filled with any of the four colors at random
   * Obviously, the code is stored and not displayed to the user
-  * Temporarily (during the development phase), the code will appear on the screen
     
 #### 3. Player chooses colors and positions for their guess
 
@@ -20,13 +17,13 @@
   * The set of four blank pegs for the guess will also be a container div with event delegation for each peg location
   * the player clicks on any blank (or filled) peg to add/change a color for the peg
   * color is added to the selected peg by the player clicking on any of the colors displayed below the game board.
-  * the player can change their mind (keep clicking on the available colors)
+  * the player can change their mind by clicking the peg again 
+    * this will blank out the peg and the player can choose a new color
   * to move on, the player clicks another peg in the guess area and adds color the same as for the first peg
   * Once the player is satisfied with their guess (a desired color placed into each of the 4 peg positions), they click a button to submit the guess
   
 #### 4. The computer responds to the player  
 
-  * This algorithm will be tricky to code
   * See the brief description on the computer's response on the README file
   * Once the computer has determined the appropriate response
     * The black pegs (if any correct color and position guessed) are placed in the response area first, then the white pegs (if any correct color, but wrong position)
@@ -37,10 +34,8 @@
   
 #### 5. Player continues to the next row of pegs to make another guess
 
-  * It seems the current row of pegs should be highlighted
-  * Event listeners could be turned off for prior guesses and only active for the current row of pegs
-    * I'm not sure if it is necessary to remove event listeners, but there is a use-case motivation for doing so.
-  
+  * The current row of pegs will be highlighted
+
 #### 6. Player continues with guesses until...
 
   * The game ends when either
