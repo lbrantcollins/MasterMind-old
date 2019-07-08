@@ -36,8 +36,8 @@ body {
 	height: 50px;
 }
 
-/* The CSS for the available game colors will 
-be generated via jQuery at the start of the game */
+/* The CSS for the available guess colors will 
+be generated via jQuery during the game */
 #guess1 {
 	background-color: red;
 }
@@ -55,10 +55,40 @@ be generated via jQuery at the start of the game */
 }
 
 .response {
-	background-color: lightgrey;
+	background-color: pink;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	flex-wrap: wrap;
+	width: 50px;
+	height: 50px;
+}
+
+.response-pegs {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 18px;
+	height: 18px;
+	border-radius: 9px;
+}
+
+/* The CSS for the response colors will 
+be generated via jQuery during the game */
+#response1 {
+	background-color: red;
+}
+
+#response2 {
+	background-color: blue;
+}
+
+#response3 {
+	background-color: green;
+}
+
+#response4 {
+	background-color: orange;
 }
 
 
@@ -72,7 +102,7 @@ be generated via jQuery at the start of the game */
 	background-color: bisque;
 }
 
-.colors {
+.color-pegs {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;

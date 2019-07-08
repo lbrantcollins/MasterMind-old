@@ -12,6 +12,7 @@
 		Here is the board container
 		<div id="row-container">
 			Here is the row container
+			<!--  These divs will be generated via jQuery during the game -->
 			<div class="one-row" id="row10">row 10</div>
 			<div class="one-row" id="row9">row 9</div>
 			<div class="one-row" id="row8">row 8</div>
@@ -23,13 +24,18 @@
 			<div class="one-row" id="row2">row 2</div>
 			<div class="one-row" id="row1">row 1
 				<div class="response">
-					response 1
+					<!--  These divs will be generated via jQuery during the game -->
+					<div class="response-pegs" id="response1">1</div>
+					<div class="response-pegs" id="response2">2</div>
+					<div class="response-pegs" id="response3">3</div>
+					<div class="response-pegs" id="response4">4</div>
 				</div>
 				<div class="guess">
-					<div class="colors" id="guess1">1</div>
-					<div class="colors" id="guess2">2</div>
-					<div class="colors" id="guess3">3</div>
-					<div class="colors" id="guess4">4</div>
+					<!--  These divs will be generated via jQuery during the game -->
+					<div class="color-pegs" id="guess1">1</div>
+					<div class="color-pegs" id="guess2">2</div>
+					<div class="color-pegs" id="guess3">3</div>
+					<div class="color-pegs" id="guess4">4</div>
 				</div>
 			</div>
 			
@@ -40,10 +46,10 @@
 
 	<div id="color-container">
 		<!--  These divs will be generated via jQuery at the start of the game -->
-		<div class="colors" id="peg1">1</div>
-		<div class="colors" id="peg2">2</div>
-		<div class="colors" id="peg3">3</div>
-		<div class="colors" id="peg4">4</div>
+		<div class="color-pegs" id="peg1">1</div>
+		<div class="color-pegs" id="peg2">2</div>
+		<div class="color-pegs" id="peg3">3</div>
+		<div class="color-pegs" id="peg4">4</div>
 	</div>
 
 
