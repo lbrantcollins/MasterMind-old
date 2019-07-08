@@ -18,7 +18,11 @@ game = {
 	startGame () {
 		this.numColors = 4;									//*** Let user choose number of colors
 
-		// initialize arrays with numColors elements
+		this.initializeArrays();
+		this.createCode();
+	},	
+
+	initializeArrays () {
 		for (let i = 0; i < this.numColors; i++) {
 			this.availableColors[i] = i;
 			this.code[i] = 0;
@@ -27,10 +31,7 @@ game = {
 			this.guessColorCount[i] = 0;
 			this.response[i] = 0;
 		}
-
-		// Let the computer choose a random code
-		this.createCode();
-	},	
+	},
 
 	createCode () {
 		this.code = [2, 3, 2, 1];  						//*** randomly generate a code
@@ -67,9 +68,20 @@ game = {
 		console.log("white pegs: " + this.whitePegs);
 
 		// Remove any overcount of correct color matches (white pegs)
-		// where count of occurrences in the code exceeds count in the guess
+		// where count of occurrences in the code exceeds count in the guess.
+		// Start by getting a count of each color appearing in the code and guess
 		for (let i = 0; i < this.numColors; i++) {
+			this.codeColorCount[this.code[i]] ++;
+			this.guessColorCount[this.guess[i]]++;
 		}
+		// tally the number of times a color appears more often in the code than the guess
+		let whitePegDecrement = 0;
+		for (let i = 0; i < this.numColors; i++) {
+			whitePegDecrement += Math.max(0, this.codeColorCount[i] - this.guessColorCount[i]); 
+			console.log(`i: ${i} and whitePegDecrement: ${whitePegDecrement}`);
+		}
+		this.whitePegs -= whitePegDecrement;
+		console.log(`whitePegs: ${this.whitePegs} and whitePegDecrement: ${whitePegDecrement}`);
 	}
 
 }
