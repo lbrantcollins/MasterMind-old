@@ -41,20 +41,27 @@ const game = {
 	respondToGuess () {
 		for (let i = 0; i < this.numColors; i++) {
 
-			// Look for correct color and position matches 
+			this.response[i] = 0;
+			// Look for correct color-and-position matches 
 			if (this.guess[i] === this.code[i]) {
 				this.blackPegs++;
+				this.response[i] = 2;
 				// console.log(`i = ${i}: one more black peg`);
 			} else 
 
-			// Look for correct color matches
+			// Look for correct color-only matches
 			if (this.code.includes(this.guess[i])) {
 				this.whitePegs++;
+				this.response[i] = 1;
 				// console.log(`i = ${i}: one more white peg`);
 			}			
 		}
+		// sort response in descending order
+		// 2 = black, 1 = white, 0 = no response
+		this.response.sort( function(a, b) { return b - a } );  
 		console.log("black pegs: " + this.blackPegs);
 		console.log("white pegs: " + this.whitePegs);
+		console.log("the response: ", this.response);
 	}
 
 }
