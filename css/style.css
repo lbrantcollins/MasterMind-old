@@ -39,19 +39,19 @@ body {
 /* The CSS for the available guess colors will 
 be generated via jQuery during the game */
 #guess1-1 {
-	background-color: red;
+	background-color: white;
 }
 
 #guess1-2 {
-	background-color: blue;
+	background-color: white;
 }
 
 #guess1-3 {
-	background-color: green;
+	background-color: white;
 }
 
 #guess1-4 {
-	background-color: orange;
+	background-color: white;
 }
 
 .response {

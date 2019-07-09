@@ -1,17 +1,20 @@
 console.log("Welcome to the world of Master Mind!");
 
 const game = {
+	// game size (4, 6, 8) and all available colors
 	numColors: null,
-	colors: [1, 2, 3, 4, 5, 6, 7, 8],
+	color: ["red", "blue", "green", "orange", "purple", "pink", "yellow", "teal"],
 
-
+	// computer code and response
 	code: [],
-	guess: [],
-	guessNumber: 1,
-
 	blackPegs: 0,
 	whitePegs: 0,
 	response: [],
+
+	// player's guess information
+	guess: [],
+	guessNumber: 1,
+	guessPegPosition: null,
 
 	startGame () {
 		this.numColors = 4;									//*** Let user choose number of colors
@@ -88,8 +91,23 @@ game.startGame();
 // we will listen to the container (e.currentTarget)
 $('#color-container').on('click', (e) => {
 	console.log(e.currentTarget);
-	console.log(e.target);
-	$('#guess1-1').css("background-color", "purple");
+	console.log($(e.target).attr("id"));
+	// The div IDs are "color1", "color2",... (extract the last number from the ID)
+	const colorId = $(e.target).attr("id");
+	const colorNumber = parseInt(colorId[colorId.length - 1]);
+	console.log(colorId, colorNumber, game.color[colorNumber - 1]);
+	console.log("#guess" + game.guessNumber + "-" + game.guessPegPosition);
+	$("#guess" + game.guessNumber + "-" + game.guessPegPosition).css("background-color", game.color[colorNumber - 1]);
+})
+
+// listen to the container for guess row #1
+// get back the position clicked (1, 2, ... , numColors)
+$('#guess1-div').on('click', (e) => {
+	console.log($(e.target).attr("id"));
+	// The div IDs are "guess1-1", "guess1-2",... (extract the last number from the ID)
+	const guessId = $(e.target).attr("id");
+	game.guessPegPosition = parseInt(guessId[guessId.length - 1]);
+	console.log("guessPegPosition: " + game.guessPegPosition);
 })
 
 
