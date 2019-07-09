@@ -12,30 +12,27 @@
 		Here is the board container
 		<div id="row-container">
 			Here is the row container
-			<!--  These divs will be generated via jQuery during the game -->
-			<div class="one-row" id="row10">row 10</div>
-			<div class="one-row" id="row9">row 9</div>
-			<div class="one-row" id="row8">row 8</div>
-			<div class="one-row" id="row7">row 7</div>
-			<div class="one-row" id="row6">row 6</div>
-			<div class="one-row" id="row5">row 5</div>
-			<div class="one-row" id="row4">row 4</div>
-			<div class="one-row" id="row3">row 3</div>
-			<div class="one-row" id="row2">row 2</div>
-			<div class="one-row" id="row1">row 1
-				<div class="response" id="response1-div">
-					<!--  These divs will be generated via jQuery during the game -->
-					<div class="response-pegs" id="response1">1</div>
-					<div class="response-pegs" id="response2">2</div>
-					<div class="response-pegs" id="response3">3</div>
-					<div class="response-pegs" id="response4">4</div>
+			<div class="one-row" data-row-number="10">row 10</div>
+			<div class="one-row" data-row-number="9">row 9</div>
+			<div class="one-row" data-row-number="8">row 8</div>
+			<div class="one-row" data-row-number="7">row 7</div>
+			<div class="one-row" data-row-number="6">row 6</div>
+			<div class="one-row" data-row-number="5">row 5</div>
+			<div class="one-row" data-row-number="4">row 4</div>
+			<div class="one-row" data-row-number="3">row 3</div>
+			<div class="one-row" data-row-number="2">row 2</div>
+			<div class="one-row" data-row-number="1">row 1
+				<div class="response" data-response-number="1">
+					<div class="response-pegs" data-peg-number="1"></div>
+					<div class="response-pegs" data-peg-number="2"></div>
+					<div class="response-pegs" data-peg-number="3"></div>
+					<div class="response-pegs" data-peg-number="4"></div>
 				</div>
-				<div class="guess" id="guess1-div">
-					<!--  These divs will be generated via jQuery during the game -->
-					<div class="color-pegs" id="guess1-1">1</div>
-					<div class="color-pegs" id="guess1-2">2</div>
-					<div class="color-pegs" id="guess1-3">3</div>
-					<div class="color-pegs" id="guess1-4">4</div>
+				<div class="guess" id="guess1-div" data-guess-number="1">
+					<div class="color-pegs" id="guess1-1" data-peg-number="1"></div>
+					<div class="color-pegs" id="guess1-2" data-peg-number="2"></div>
+					<div class="color-pegs" id="guess1-3" data-peg-number="3"></div>
+					<div class="color-pegs" id="guess1-4" data-peg-number="4"></div>
 				</div>
 			</div>
 			

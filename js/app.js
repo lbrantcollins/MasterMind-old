@@ -98,18 +98,45 @@ $('#color-container').on('click', (e) => {
 	console.log(colorId, colorNumber, game.color[colorNumber - 1]);
 	console.log("#guess" + game.guessNumber + "-" + game.guessPegPosition);
 	$("#guess" + game.guessNumber + "-" + game.guessPegPosition).css("background-color", game.color[colorNumber - 1]);
+	$("#guess" + game.guessNumber + "-" + game.guessPegPosition).css("border", "none");
 })
 
 // listen to the container for guess row #1
 // get back the position clicked (1, 2, ... , numColors)
+
 $('#guess1-div').on('click', (e) => {
 	console.log($(e.target).attr("id"));
 	// The div IDs are "guess1-1", "guess1-2",... (extract the last number from the ID)
 	const guessId = $(e.target).attr("id");
 	game.guessPegPosition = parseInt(guessId[guessId.length - 1]);
 	console.log("guessPegPosition: " + game.guessPegPosition);
+	$("#guess1" + "-" + game.guessPegPosition).css("border-color", "red");	
+
 })
 
+
+
+$('.guess').on('click', (e) => {
+
+	console.log("peg number: " + $(e.target).data().pegNumber);
+	console.log("guess number: " + $(e.currentTarget).data().guessNumber);
+	console.log($(e.target).data());
+
+	console.log("game.guessNumber: " + game.guessNumber);
+	
+	const guessDiv = $(`.guess[data-guess-number = '${game.guessNumber}']`);
+	console.log(guessDiv);
+	const pegDiv = guessDiv.find(`[data-peg-number = '${$(e.target).data().pegNumber}']`);
+	console.log(pegDiv);
+	console.log($("#guess1-3"));
+
+	// console.log($('.guess[data-guess-number="1"][data-peg-number="3"]'));
+
+	// console.log(`[data-guess-number="1"]`);
+	// console.log(`[data-guess-number=1]`);
+	// console.log(`[data-guess-number=game.guessNumber]`);
+
+})
 
 // document.getElementById('container-div').addEventListener('click', (e) => {
 
