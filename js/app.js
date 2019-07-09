@@ -2,7 +2,8 @@ console.log("Welcome to the world of Master Mind!");
 
 const game = {
 	numColors: null,
-	availableColors: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+	colors: [1, 2, 3, 4, 5, 6, 7, 8],
+
 
 	code: [],
 	guess: [],
@@ -20,7 +21,7 @@ const game = {
 	generateCode () {
 		// randomly generate a code
 		for (let i = 0; i < this.numColors; i++) {
-			this.code[i] = Math.floor( Math.random() * 4 );
+			this.code[i] = Math.floor( Math.random() * this.numColors );
 		}
 		console.log("the code: ", this.code);
 
@@ -56,9 +57,20 @@ const game = {
 		}
 		// sort response in descending order for ease of output
 		// 2 = black, 1 = white, 0 = no response
-		this.response.sort( function(a, b) { return b - a } );  
+		this.response.sort( function(a, b) { return b - a } );
 		console.log("the response: ", this.response);
 
+		// re-code the response as values for CSS "background-color" property
+		for (let i = 0; i < this.numColors; i++) {
+			if (this.response[i] === 2) {
+				this.response[i] = "black";
+			} else if (this.response[i] === 1) {
+				this.response[i] = "white";
+			} else {
+				this.response[i] = "none";
+			}
+		}
+		console.log("the response: ", this.response);	
 	}
 
 }
@@ -72,6 +84,27 @@ game.startGame();
 // Event listeners
 //*************************************************************************
 
+// instead of adding listeners for each available-color button
+// we will listen to the container (e.currentTarget)
+$('#color-container').on('click', (e) => {
+	console.log(e.currentTarget);
+	console.log(e.target);
+	$('#guess1-1').css("background-color", "purple");
+})
+
+
+// document.getElementById('container-div').addEventListener('click', (e) => {
+
+// console.log(e);
+//   // e.target is the actual thing we clicked
+//   // and when we click inside a button div, we know the button value
+//   if (e.target.className === "button-div") {
+//     // pass along the text on the button and the button div id
+//      calculator.takeActionForButton(e.target.textContent, e.target.id);
+//    }
+  
+
+// })
 
 
 

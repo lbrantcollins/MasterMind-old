@@ -10,7 +10,7 @@ body {
 }
 
 #row-container {
-	background-color: orange;
+	background-color: khaki;
 	width: 85%;
 	height: 90%; 
 	/* center horizontally */
@@ -38,19 +38,19 @@ body {
 
 /* The CSS for the available guess colors will 
 be generated via jQuery during the game */
-#guess1 {
+#guess1-1 {
 	background-color: red;
 }
 
-#guess2 {
+#guess1-2 {
 	background-color: blue;
 }
 
-#guess3 {
+#guess1-3 {
 	background-color: green;
 }
 
-#guess4 {
+#guess1-4 {
 	background-color: orange;
 }
 
@@ -99,7 +99,7 @@ be generated via jQuery during the game */
 	margin: 10px 65px;
 	width: 170px;
 	height: 50px;
-	background-color: bisque;
+	background-color: khaki;
 }
 
 .color-pegs {
@@ -113,18 +113,18 @@ be generated via jQuery during the game */
 
 /* The CSS for the available game colors will 
 be generated via jQuery at the start of the game */
-#peg1 {
+#color1 {
 	background-color: red;
 }
 
-#peg2 {
+#color2 {
 	background-color: blue;
 }
 
-#peg3 {
+#color3 {
 	background-color: green;
 }
 
-#peg4 {
+#color4 {
 	background-color: orange;
 }
