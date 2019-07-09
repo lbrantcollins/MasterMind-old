@@ -23,10 +23,10 @@
 			<div class="one-row" data-row-number="2">row 2</div>
 			<div class="one-row" data-row-number="1">row 1
 				<div class="response" data-response-number="1">
-					<div class="response-pegs" data-peg-number="1"></div>
-					<div class="response-pegs" data-peg-number="2"></div>
-					<div class="response-pegs" data-peg-number="3"></div>
-					<div class="response-pegs" data-peg-number="4"></div>
+					<div class="response-pegs" id="response1" data-peg-number="1">1</div>
+					<div class="response-pegs" id="response2" data-peg-number="2">2</div>
+					<div class="response-pegs" id="response3" data-peg-number="3">3</div>
+					<div class="response-pegs" id="response4" data-peg-number="4">4</div>
 				</div>
 				<div class="guess" id="guess1-div" data-guess-number="1">
 					<div class="color-pegs" id="guess1-1" data-peg-number="1"></div>
@@ -34,19 +34,15 @@
 					<div class="color-pegs" id="guess1-3" data-peg-number="3"></div>
 					<div class="color-pegs" id="guess1-4" data-peg-number="4"></div>
 				</div>
-			</div>
-			
-			
-			
+			</div>	
 		</div>
 	</div>
 
 	<div id="color-container">
-		<!--  These divs will be generated via jQuery at the start of the game -->
-		<div class="color-pegs" id="color1"></div>
-		<div class="color-pegs" id="color2"></div>
-		<div class="color-pegs" id="color3"></div>
-		<div class="color-pegs" id="color4"></div>
+		<div class="color-pegs colors" id="color1" data-color-number="0"></div>
+		<div class="color-pegs colors" id="color2" data-color-number="1"></div>
+		<div class="color-pegs colors" id="color3" data-color-number="2"></div>
+		<div class="color-pegs colors" id="color4" data-color-number="3"></div>
 	</div>
 
 

@@ -15,6 +15,7 @@ const game = {
 	guess: [],
 	guessNumber: 1,
 	guessPegPosition: null,
+	guessPegLocation: null,
 
 	startGame () {
 		this.numColors = 4;									//*** Let user choose number of colors
@@ -87,69 +88,20 @@ game.startGame();
 // Event listeners
 //*************************************************************************
 
-// instead of adding listeners for each available-color button
-// we will listen to the container (e.currentTarget)
-$('#color-container').on('click', (e) => {
-	console.log(e.currentTarget);
-	console.log($(e.target).attr("id"));
-	// The div IDs are "color1", "color2",... (extract the last number from the ID)
-	const colorId = $(e.target).attr("id");
-	const colorNumber = parseInt(colorId[colorId.length - 1]);
-	console.log(colorId, colorNumber, game.color[colorNumber - 1]);
-	console.log("#guess" + game.guessNumber + "-" + game.guessPegPosition);
-	$("#guess" + game.guessNumber + "-" + game.guessPegPosition).css("background-color", game.color[colorNumber - 1]);
-	$("#guess" + game.guessNumber + "-" + game.guessPegPosition).css("border", "none");
-})
-
-// listen to the container for guess row #1
-// get back the position clicked (1, 2, ... , numColors)
-
-$('#guess1-div').on('click', (e) => {
-	console.log($(e.target).attr("id"));
-	// The div IDs are "guess1-1", "guess1-2",... (extract the last number from the ID)
-	const guessId = $(e.target).attr("id");
-	game.guessPegPosition = parseInt(guessId[guessId.length - 1]);
-	console.log("guessPegPosition: " + game.guessPegPosition);
-	$("#guess1" + "-" + game.guessPegPosition).css("border-color", "red");	
-
-})
-
-
-
+// listen to all guess rows at the same time (class = guess)
+// find, save, and highlight the location of the chosen peg (in the guess area)
 $('.guess').on('click', (e) => {
-
-	console.log("peg number: " + $(e.target).data().pegNumber);
-	console.log("guess number: " + $(e.currentTarget).data().guessNumber);
-	console.log($(e.target).data());
-
-	console.log("game.guessNumber: " + game.guessNumber);
-	
 	const guessDiv = $(`.guess[data-guess-number = '${game.guessNumber}']`);
-	console.log(guessDiv);
-	const pegDiv = guessDiv.find(`[data-peg-number = '${$(e.target).data().pegNumber}']`);
-	console.log(pegDiv);
-	console.log($("#guess1-3"));
-
-	// console.log($('.guess[data-guess-number="1"][data-peg-number="3"]'));
-
-	// console.log(`[data-guess-number="1"]`);
-	// console.log(`[data-guess-number=1]`);
-	// console.log(`[data-guess-number=game.guessNumber]`);
-
+	game.guessPegLocation = guessDiv.find(`[data-peg-number = '${$(e.target).data().pegNumber}']`);
+	game.guessPegLocation.css("border-color", "red");
 })
 
-// document.getElementById('container-div').addEventListener('click', (e) => {
 
-// console.log(e);
-//   // e.target is the actual thing we clicked
-//   // and when we click inside a button div, we know the button value
-//   if (e.target.className === "button-div") {
-//     // pass along the text on the button and the button div id
-//      calculator.takeActionForButton(e.target.textContent, e.target.id);
-//    }
-  
-
-// })
+// listen to all available-color divs at the same time (class = colors)
+// push the chosen color onto the peg chosen by the guess-class event listener
+$('.colors').on('click', (e) => {
+	game.guessPegLocation.css("background-color", game.color[$(e.target).data().colorNumber]);
+})
 
 
 
