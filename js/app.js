@@ -28,10 +28,6 @@ const game = {
 		for (i = 0; i < this.numColors; i++ ) {
 		colorDiv.find(`[data-color-number = '${i}']`).css("background-color", this.color[i]);
 		}
-		// $('#color1').css("background-color", this.color[0]);
-		// $('#color2').css("background-color", this.color[1]);
-		// $('#color3').css("background-color", this.color[2]);
-		// $('#color4').css("background-color", this.color[3]);
 	},
 
 	generateCode () {
@@ -40,10 +36,6 @@ const game = {
 			this.code[i] = Math.floor( Math.random() * this.numColors );
 		}
 		console.log("the code: ", this.code);
-
-		// Let user start guessing
-		this.guessColors();
-
 	},
 
 	highlightCurrentGuessPeg (e) {
@@ -82,47 +74,39 @@ const game = {
 	checkGuess () {
 		// check to see that 
 		//   1. the submit button clicked is the one for the current guess row
+		//********************
+		//****** NOT YET CODED
+		//********************
 		//   2. all peg positions have a selected color
 		this.guessRowLocation = $(`.guess[data-guess-number = '${game.guessNumber}']`);
 		let validGuess = true;
 		const guess = [];
 		for (let i = 1; i <=	game.numColors; i++) {
 			index = i - 1;
-			if ( this.guessRowLocation.find(`[data-peg-number = '${i}']`).css("background-color") === "rgb(255, 255, 255)") {
-				// this peg is white (not yet filled with a color)
+			if (this.color.includes(this.guessRowLocation.find(`[data-peg-number = '${i}']`).css("background-color"))) {
+				console.log("valid color is chosen in position " + i);
+				guess[index] = this.guessRowLocation.find(`[data-peg-number = '${i}']`).css("background-color");
+			} else {
 				guess[index] = false;
 				validGuess = false;
-			} else {
-				guess[index] = this.guessRowLocation.find(
-					`[data-peg-number = '${i}']`).css("background-color"
-					);
 			}
 		}
 		console.log(guess);
 		console.log(validGuess);
-		if (validGuess) {
-			for (let i = 0; i < game.numColors; i++) {
-				for (let j = 0; j < game.numColors; j++) {
-
-					//********************************************
-					//********************************************
-					// START HERE *********************************************************
-					//********************************************
-					//********************************************
-				}
-			}
-
-		}
+		if (validGuess) { this.recodeGuess(guess); }
+		// else, do nothing, since guess is not yet complete
 	},
 
-	
-	guessColors () {
-		this.guess = [3, 3, 1, 2];  						//*** let user choose colors
-		console.log("the guess: ", this.guess);
-
-		// Ask the computer to respond to the guess
+	recodeGuess (guess) {
+		for (let i = 0; i < this.numColors; i++) {
+			for (let j = 0; j < this.numColors; j++) {
+				if (guess[i] === this.color[j]) {
+					this.guess[i] = j;
+				}
+			}
+		}
+		console.log(this.guess);
 		this.respondToGuess();
-
 	},
 
 	respondToGuess () {
@@ -144,7 +128,7 @@ const game = {
 		// sort response in descending order for ease of output
 		// 2 = black, 1 = white, 0 = no response
 		this.response.sort( function(a, b) { return b - a } );
-		console.log("the response: ", this.response);
+		// console.log("the response: ", this.response);
 
 		// re-code the response as values for CSS "background-color" property
 		for (let i = 0; i < this.numColors; i++) {
@@ -156,7 +140,9 @@ const game = {
 				this.response[i] = "none";
 			}
 		}
-		console.log("the response: ", this.response);	
+		console.log("the code:     " +  this.code);
+		console.log("the guess:    " + this.guess);
+		console.log("the response: " + this.response);	
 	}
 
 }

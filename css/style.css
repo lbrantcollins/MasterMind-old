@@ -16,7 +16,7 @@ button {
 #game-board-container {
 	position: relative;
 	width: 500px;
-	height: 500px;
+	height: 325px;
 	background-color: lightsteelblue;
 }
 
@@ -101,7 +101,7 @@ be generated via jQuery during the game */
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	margin: 10px 65px;
+	margin: 10px 175px;
 	width: 170px;
 	height: 50px;
 	background-color: khaki;
