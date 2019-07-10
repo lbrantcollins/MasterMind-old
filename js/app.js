@@ -3,7 +3,7 @@ console.log("Welcome to the world of Master Mind!");
 const game = {
 	// game size (4, 6, 8) and all available colors
 	numColors: null,
-	color: ["rgb(255, 0, 0)", "rgb(0, 0, 255)", "rgb(0, 128, 0)", "rgb(255, 165, 0)", "purple", "pink", "yellow", "teal"],
+	color: ["rgb(255, 99, 71)", "rgb(65, 105, 225)", "rgb(60, 179, 113)", "rgb(255, 165, 0)", "purple", "pink", "yellow", "teal"],
 
 	// computer code and response
 	code: [],
@@ -14,13 +14,25 @@ const game = {
 	// player's guess information
 	guess: [],
 	guessNumber: 1,
-	guessPegPosition: null,
+	guessRowLocation: null,
 	guessPegLocation: null,
 
 	startGame () {
 		this.numColors = 4;									//*** Let user choose number of colors
+		this.displayAvailableColors();
 		this.generateCode();
 	},	
+
+	displayAvailableColors () {
+		const colorDiv = $('#color-container');
+		for (i = 0; i < this.numColors; i++ ) {
+		colorDiv.find(`[data-color-number = '${i}']`).css("background-color", this.color[i]);
+		}
+		// $('#color1').css("background-color", this.color[0]);
+		// $('#color2').css("background-color", this.color[1]);
+		// $('#color3').css("background-color", this.color[2]);
+		// $('#color4').css("background-color", this.color[3]);
+	},
 
 	generateCode () {
 		// randomly generate a code
@@ -36,19 +48,20 @@ const game = {
 
 	highlightCurrentGuessPeg (e) {
 		// find the current guess peg via event delegation
-		// First, find particular guess row div 
+		// 1. find particular guess row div 
 		// using html .guess class data (guess-number)
-		const guessDiv = $(`.guess[data-guess-number = '${this.guessNumber}']`);
-		// Second, find the peg in the guess div using html data (peg-number)
-		this.guessPegLocation 
-				= guessDiv.find(`[data-peg-number = '${$(e.target).data().pegNumber}']`);
-		//highlight the location of the current peg (and un-highlight other pegs)
+		this.guessRowLocation = $(`.guess[data-guess-number = '${this.guessNumber}']`);
+		// 2. find the peg in the guess div using html data (peg-number)
+		this.guessPegLocation = this.guessRowLocation.find( 
+			`[data-peg-number = '${$(e.target).data().pegNumber}']`
+			);
+		// 3. highlight the location of the current peg (and un-highlight other pegs)
 		for (let i = 1; i <=	this.numColors; i++) {
 			if (i === $(e.target).data().pegNumber) {
 				this.guessPegLocation.addClass("current-peg");
 			}
 			else {
-				guessDiv.find(`[data-peg-number = '${i}']`).removeClass("current-peg");
+				this.guessRowLocation.find(`[data-peg-number = '${i}']`).removeClass("current-peg");
 			}
 		}
 	},
@@ -58,20 +71,31 @@ const game = {
 			this.color[$(e.target).data().colorNumber]);
 	},
 
+	clearCurrentGuessFormatting(e) {
+		this.guessPegLocation.removeClass("current-peg");
+		for (let i = 1; i <=	this.numColors; i++) {
+			this.guessRowLocation.find(`[data-peg-number = '${i}']`).css("border", "none");
+		}
+	},
+
+
 	checkGuess () {
 		// check to see that 
 		//   1. the submit button clicked is the one for the current guess row
 		//   2. all peg positions have a selected color
-		const guessDiv = $(`.guess[data-guess-number = '${game.guessNumber}']`);
+		this.guessRowLocation = $(`.guess[data-guess-number = '${game.guessNumber}']`);
 		let validGuess = true;
 		const guess = [];
 		for (let i = 1; i <=	game.numColors; i++) {
 			index = i - 1;
-			if ( guessDiv.find(`[data-peg-number = '${i}']`).css("background-color") === "rgb(255, 255, 255)") {
+			if ( this.guessRowLocation.find(`[data-peg-number = '${i}']`).css("background-color") === "rgb(255, 255, 255)") {
 				// this peg is white (not yet filled with a color)
+				guess[index] = false;
 				validGuess = false;
 			} else {
-				guess[index] = guessDiv.find(`[data-peg-number = '${i}']`).css("background-color");
+				guess[index] = this.guessRowLocation.find(
+					`[data-peg-number = '${i}']`).css("background-color"
+					);
 			}
 		}
 		console.log(guess);
@@ -162,6 +186,7 @@ $('.colors').on('click', (e) => {
 //   1. the submit button clicked is the one for the current guess row
 //   2. all peg positions have a selected color
 $('.guess-button').on('click', (e) => {
+	game.clearCurrentGuessFormatting(e);
 	game.checkGuess();
 })
 

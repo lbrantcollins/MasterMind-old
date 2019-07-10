@@ -118,8 +118,8 @@ be generated via jQuery during the game */
 
 /* The CSS for the available game colors will 
 be generated via jQuery at the start of the game */
-#color1 {
-	background-color: red;
+/*#color1 {
+	background-color: purple;
 }
 
 #color2 {
@@ -132,4 +132,4 @@ be generated via jQuery at the start of the game */
 
 #color4 {
 	background-color: orange;
-}
+}*/
