@@ -24,12 +24,13 @@ body {
 
 #scoreboard-container {
 	background-color: pink;
-	width: 200px;
-	height: 650px; 
+	width: 150px;
+	height: 200px;
   	display: flex;
-	/*justify-content: space-around;*/
-	align-items: center;
-	/*flex-wrap: wrap;*/
+  	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: left;
+	flex-wrap: wrap;
 }
 
 #background-container {
