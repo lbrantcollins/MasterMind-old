@@ -34,6 +34,64 @@ const game = {
 
 	},
 
+	highlightCurrentGuessPeg (e) {
+		// find the current guess peg via event delegation
+		// First, find particular guess row div 
+		// using html .guess class data (guess-number)
+		const guessDiv = $(`.guess[data-guess-number = '${this.guessNumber}']`);
+		// Second, find the peg in the guess div using html data (peg-number)
+		this.guessPegLocation 
+				= guessDiv.find(`[data-peg-number = '${$(e.target).data().pegNumber}']`);
+		//highlight the location of the current peg (and un-highlight other pegs)
+		for (let i = 1; i <=	this.numColors; i++) {
+			if (i === $(e.target).data().pegNumber) {
+				this.guessPegLocation.addClass("current-peg");
+			}
+			else {
+				guessDiv.find(`[data-peg-number = '${i}']`).removeClass("current-peg");
+			}
+		}
+	},
+
+	colorCurrentGuessPeg (e) {
+		this.guessPegLocation.css("background-color", 
+			this.color[$(e.target).data().colorNumber]);
+	},
+
+	checkGuess () {
+		// check to see that 
+		//   1. the submit button clicked is the one for the current guess row
+		//   2. all peg positions have a selected color
+		const guessDiv = $(`.guess[data-guess-number = '${game.guessNumber}']`);
+		let validGuess = true;
+		const guess = [];
+		for (let i = 1; i <=	game.numColors; i++) {
+			index = i - 1;
+			if ( guessDiv.find(`[data-peg-number = '${i}']`).css("background-color") === "rgb(255, 255, 255)") {
+				// this peg is white (not yet filled with a color)
+				validGuess = false;
+			} else {
+				guess[index] = guessDiv.find(`[data-peg-number = '${i}']`).css("background-color");
+			}
+		}
+		console.log(guess);
+		console.log(validGuess);
+		if (validGuess) {
+			for (let i = 0; i < game.numColors; i++) {
+				for (let j = 0; j < game.numColors; j++) {
+
+					//********************************************
+					//********************************************
+					// START HERE *********************************************************
+					//********************************************
+					//********************************************
+				}
+			}
+
+		}
+	},
+
+	
 	guessColors () {
 		this.guess = [3, 3, 1, 2];  						//*** let user choose colors
 		console.log("the guess: ", this.guess);
@@ -91,56 +149,20 @@ game.startGame();
 // listen to all guess rows at the same time (class = guess)
 // find, save, and highlight the location of the chosen peg (in the guess area)
 $('.guess').on('click', (e) => {
-	const guessDiv = $(`.guess[data-guess-number = '${game.guessNumber}']`);
-	game.guessPegLocation = guessDiv.find(`[data-peg-number = '${$(e.target).data().pegNumber}']`);
-	//highlight the location of the peg currently guessing (and un-highlight other pegs)
-	for (let i = 1; i <=	game.numColors; i++) {
-		if (i === $(e.target).data().pegNumber) {
-			game.guessPegLocation.addClass("current-peg");
-		}
-		else {
-			guessDiv.find(`[data-peg-number = '${i}']`).removeClass("current-peg");
-		}
-	}
-	
+	game.highlightCurrentGuessPeg(e);	
 })
 
 // listen to all available-color divs at the same time (class = colors)
 // push the chosen color onto the peg chosen by the guess-class event listener
 $('.colors').on('click', (e) => {
-	game.guessPegLocation.css("background-color", game.color[$(e.target).data().colorNumber]);
-	// game.guessPegLocation.removeClass("current-peg");
+	game.colorCurrentGuessPeg(e);
 })
 
 // listen for a guess to be submitted, but only act if
-//   1. all peg positions have a selected color
-//   2. the submit button clicked is the one for the current guess row
+//   1. the submit button clicked is the one for the current guess row
+//   2. all peg positions have a selected color
 $('.guess-button').on('click', (e) => {
-	const guessDiv = $(`.guess[data-guess-number = '${game.guessNumber}']`);
-	let validGuess = true;
-	const guess = [];
-	for (let i = 1; i <=	game.numColors; i++) {
-		index = i - 1;
-		if ( guessDiv.find(`[data-peg-number = '${i}']`).css("background-color") === "rgb(255, 255, 255)") {
-			// this peg is white (not yet filled with a color)
-			validGuess = false;
-		} else {
-			guess[index] = guessDiv.find(`[data-peg-number = '${i}']`).css("background-color");
-		}
-	}
-	console.log(guess);
-	if (validGuess) {
-		for (let i = 0; i < game.numColors; i++) {
-			for (let j = 0; j < game.numColors; j++) {
-				/********************************************
-				/********************************************
-				// START HERE *********************************************************
-				/********************************************
-				/********************************************
-			}
-		}
-
-	}
+	game.checkGuess();
 })
 
 
