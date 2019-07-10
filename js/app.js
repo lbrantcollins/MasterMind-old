@@ -36,7 +36,11 @@ const game = {
 		for (let i = 0; i < this.numColors; i++) {
 			this.code[i] = Math.floor( Math.random() * this.numColors );
 		}
-		// console.log("the code: ", this.code);
+		// ***************
+		// move this to the end of the game
+		// ***************
+		this.revealCode();
+
 	},
 
 	highlightCurrentGuessPeg (e) {
@@ -154,7 +158,15 @@ const game = {
 
 	goToNextGuess () {
 		this.guessNumber++;
-	}
+	},
+
+	revealCode () {
+		const codeDiv = $('#code-container');
+		for (i = 0; i < this.numColors; i++ ) {
+			codeDiv.find(`[data-color-number = '${i}']`).css("background-color", this.color[this.code[i]]);
+		}
+	},
+
 
 }
 
