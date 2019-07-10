@@ -3,7 +3,7 @@ console.log("Welcome to the world of Master Mind!");
 const game = {
 	// game size (4, 6, 8) and all available colors
 	numColors: null,
-	color: ["red", "blue", "green", "orange", "purple", "pink", "yellow", "teal"],
+	color: ["rgb(255, 0, 0)", "rgb(0, 0, 255)", "rgb(0, 128, 0)", "rgb(255, 165, 0)", "purple", "pink", "yellow", "teal"],
 
 	// computer code and response
 	code: [],
@@ -93,7 +93,7 @@ game.startGame();
 $('.guess').on('click', (e) => {
 	const guessDiv = $(`.guess[data-guess-number = '${game.guessNumber}']`);
 	game.guessPegLocation = guessDiv.find(`[data-peg-number = '${$(e.target).data().pegNumber}']`);
-	// game.guessPegLocation.css("border-color", "red");
+	//highlight the location of the peg currently guessing (and un-highlight other pegs)
 	for (let i = 1; i <=	game.numColors; i++) {
 		if (i === $(e.target).data().pegNumber) {
 			game.guessPegLocation.addClass("current-peg");
@@ -105,17 +105,42 @@ $('.guess').on('click', (e) => {
 	
 })
 
-
 // listen to all available-color divs at the same time (class = colors)
 // push the chosen color onto the peg chosen by the guess-class event listener
 $('.colors').on('click', (e) => {
 	game.guessPegLocation.css("background-color", game.color[$(e.target).data().colorNumber]);
-	game.guessPegLocation.removeClass("current-peg");
+	// game.guessPegLocation.removeClass("current-peg");
 })
 
+// listen for a guess to be submitted, but only act if
+//   1. all peg positions have a selected color
+//   2. the submit button clicked is the one for the current guess row
 $('.guess-button').on('click', (e) => {
 	const guessDiv = $(`.guess[data-guess-number = '${game.guessNumber}']`);
-	console.log(guessDiv);
+	let validGuess = true;
+	const guess = [];
+	for (let i = 1; i <=	game.numColors; i++) {
+		index = i - 1;
+		if ( guessDiv.find(`[data-peg-number = '${i}']`).css("background-color") === "rgb(255, 255, 255)") {
+			// this peg is white (not yet filled with a color)
+			validGuess = false;
+		} else {
+			guess[index] = guessDiv.find(`[data-peg-number = '${i}']`).css("background-color");
+		}
+	}
+	console.log(guess);
+	if (validGuess) {
+		for (let i = 0; i < game.numColors; i++) {
+			for (let j = 0; j < game.numColors; j++) {
+				/********************************************
+				/********************************************
+				// START HERE *********************************************************
+				/********************************************
+				/********************************************
+			}
+		}
+
+	}
 })
 
 
