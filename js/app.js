@@ -153,6 +153,11 @@ const game = {
 		for (i = 0; i < this.numColors; i++ ) {
 		this.responseRowLocation.find(`[data-peg-number = '${i}']`).css("background-color", this.response[i]);
 		}	
+		this.goToNextGuess();
+	},
+
+	goToNextGuess () {
+		this.guessNumber++;
 	}
 
 }

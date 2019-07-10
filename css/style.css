@@ -2,40 +2,63 @@ body {
 	background-color: lavender;
 }
 
-.submit-guess {
-	width: 55px;
-	height: 50px;
-	white-space: normal;
-   word-wrap: break-word;
-}
 
 #game-board-container {
-	position: relative;
-	width: 500px;
-	height: 325px;
 	background-color: lightsteelblue;
+	width: 550px;
+	height: 700px;
+	position: relative;
 }
 
-#row-container {
+#background-container {
 	background-color: khaki;
 	width: 85%;
 	height: 90%; 
-	/* center horizontally */
   	margin: auto 7.5%;
-	/* center vertically */		
 	position: absolute;
    top: 50%;
   	transform: translateY(-50%);
+  	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+#row-container {
+	/*background-color: orange;*/
+	width: 90%;
+	height: 95%; 
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: wrap;
+	
+  	/*margin: auto 7.5%;
+	
+	position: absolute;
+   top: 50%;
+  	transform: translateY(-50%);*/
+}
+
+.row-number {
+	width: 50px;
+	height: 50px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	border: 1px solid black;
+	border-radius: 50%;
 }
 
 .one-row {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-around;
 	align-items: center;
+	width: 90%;
 }
 
 .guess {
-	background-color: lightblue;
+	/*background-color: lightsteelblue;*/
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -56,7 +79,7 @@ be generated via jQuery during the game */
 }
 
 .response {
-	background-color: pink;
+	/*background-color: pink;*/
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -79,10 +102,10 @@ be generated via jQuery during the game */
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	margin: 10px 175px;
+	margin: 10px 194px;
 	width: 170px;
 	height: 50px;
-	background-color: khaki;
+	background-color: lightsteelblue;
 }
 
 .color-pegs {
