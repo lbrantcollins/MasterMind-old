@@ -2,6 +2,17 @@ body {
 	background-color: lavender;
 }
 
+button {
+
+}
+
+.submit-guess {
+	width: 55px;
+	height: 50px;
+	white-space: normal;
+   word-wrap: break-word;
+}
+
 #game-board-container {
 	position: relative;
 	width: 500px;
@@ -36,27 +47,18 @@ body {
 	height: 50px;
 }
 
+.current-peg {
+   box-shadow: inset 0px 0px 0px 3px black;
+   box-sizing: border-box;
+}
+
 /* The CSS for the available guess colors will 
 be generated via jQuery during the game */
-#guess1-1 {
+.guess-pegs {
 	background-color: white;
 	border: 1px solid black;
 }
 
-#guess1-2 {
-	background-color: white;
-	border: 1px solid black;
-}
-
-#guess1-3 {
-	background-color: white;
-	border: 1px solid black;
-}
-
-#guess1-4 {
-	background-color: white;
-	border: 1px solid black;
-}
 
 .response {
 	background-color: pink;
@@ -74,7 +76,7 @@ be generated via jQuery during the game */
 	align-items: center;
 	width: 18px;
 	height: 18px;
-	border-radius: 9px;
+	border-radius: 50%;
 }
 
 /* The CSS for the response colors will 
@@ -95,7 +97,6 @@ be generated via jQuery during the game */
 	background-color: orange;
 }
 
-
 #color-container {
 	display: flex;
 	justify-content: space-evenly;
@@ -112,7 +113,7 @@ be generated via jQuery during the game */
 	align-items: center;
 	width: 30px;
 	height: 30px;
-	border-radius: 15px;
+	border-radius: 50%;
 }
 
 /* The CSS for the available game colors will 

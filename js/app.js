@@ -93,7 +93,16 @@ game.startGame();
 $('.guess').on('click', (e) => {
 	const guessDiv = $(`.guess[data-guess-number = '${game.guessNumber}']`);
 	game.guessPegLocation = guessDiv.find(`[data-peg-number = '${$(e.target).data().pegNumber}']`);
-	game.guessPegLocation.css("border-color", "red");
+	// game.guessPegLocation.css("border-color", "red");
+	for (let i = 1; i <=	game.numColors; i++) {
+		if (i === $(e.target).data().pegNumber) {
+			game.guessPegLocation.addClass("current-peg");
+		}
+		else {
+			guessDiv.find(`[data-peg-number = '${i}']`).removeClass("current-peg");
+		}
+	}
+	
 })
 
 
@@ -101,6 +110,12 @@ $('.guess').on('click', (e) => {
 // push the chosen color onto the peg chosen by the guess-class event listener
 $('.colors').on('click', (e) => {
 	game.guessPegLocation.css("background-color", game.color[$(e.target).data().colorNumber]);
+	game.guessPegLocation.removeClass("current-peg");
+})
+
+$('.guess-button').on('click', (e) => {
+	const guessDiv = $(`.guess[data-guess-number = '${game.guessNumber}']`);
+	console.log(guessDiv);
 })
 
 
