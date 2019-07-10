@@ -2,21 +2,40 @@ body {
 	background-color: lavender;
 }
 
-#game-board-container {
+#overall-container {
 	background-color: lightsteelblue;
 	width: 800px;
-	height: 800px;
+	height: 825px;
 	/*position: relative;*/
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	align-items: center;
-	flex-direction: column;
+	/*flex-direction: column;*/
+}
+
+#game-board-container {
+	width:500px;
+	height: 800px;
+	/*display: flex;*/
+/*	justify-content: space-around;
+	align-items: center;
+	flex-direction: column;*/
+}
+
+#scoreboard-container {
+	background-color: pink;
+	width: 200px;
+	height: 650px; 
+  	display: flex;
+	/*justify-content: space-around;*/
+	align-items: center;
+	/*flex-wrap: wrap;*/
 }
 
 #background-container {
 	background-color: khaki;
-	width: 500;
-	height: 650; 
+	width: 500px;
+	height: 650px; 
   	/*margin-left: 25px;*/
 	/*position: absolute;
    top: 50%;
@@ -37,15 +56,7 @@ body {
 	background-color: pink;
 }
 
-#scoreboard {
-	background-color: pink;
-	width: 300;
-	height: 650; 
-  	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	/*flex-wrap: wrap;*/
-}
+
 
 #row-container {
 	/*background-color: orange;*/
