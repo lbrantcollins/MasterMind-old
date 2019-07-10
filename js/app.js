@@ -40,23 +40,27 @@ const game = {
 	},
 
 	highlightCurrentGuessPeg (e) {
-		// find the current guess peg via event delegation
-		// 1. find particular guess row div 
-		// using html .guess class data (guess-number)
-		this.guessRowLocation = $(`.guess[data-guess-number = '${this.guessNumber}']`);
-		// 2. find the peg in the guess div using html data (peg-number)
-		this.guessPegLocation = this.guessRowLocation.find( 
-			`[data-peg-number = '${$(e.target).data().pegNumber}']`
-			);
-		// 3. highlight the location of the current peg (and un-highlight other pegs)
-		for (let i = 1; i <=	this.numColors; i++) {
-			if (i === $(e.target).data().pegNumber) {
-				this.guessPegLocation.addClass("current-peg");
-			}
-			else {
-				this.guessRowLocation.find(`[data-peg-number = '${i}']`).removeClass("current-peg");
+		// check if peg clicked is in the current guess row
+		if ( e.currentTarget.dataset.guessNumber == this.guessNumber ) {
+
+			// find the current guess peg via event delegation
+			// 1. find particular guess row div using html .guess class data (guess-number)		
+			this.guessRowLocation = $(`.guess[data-guess-number = '${this.guessNumber}']`);
+			// 2. find the peg in the .guess div using html data (peg-number)
+			this.guessPegLocation = this.guessRowLocation.find( 
+				`[data-peg-number = '${$(e.target).data().pegNumber}']`
+				);
+			// 3. highlight the location of the current peg (and un-highlight other pegs)
+			for (let i = 1; i <=	this.numColors; i++) {
+				if (i === $(e.target).data().pegNumber) {
+					this.guessPegLocation.addClass("current-peg");
+				}
+				else {
+					this.guessRowLocation.find(`[data-peg-number = '${i}']`).removeClass("current-peg");
+				}
 			}
 		}
+		// else: do nothing if the peg clicked is not in the current guess row
 	},
 
 	colorCurrentGuessPeg (e) {
@@ -72,36 +76,28 @@ const game = {
 	},
 
 
-	checkGuess () {
-		// check to see that 
-		//   1. the submit button clicked is the one for the current guess row
-		//********************
-		//****** NOT YET CODED
-		//********************
-		//   2. all peg positions have a selected color
+	checkGuess (e) {
+		// check that all peg positions have a selected color
+
 		this.guessRowLocation = $(`.guess[data-guess-number = '${game.guessNumber}']`);
-		let validGuess = true;
-		const guess = [];
+		let isValidGuess = true;
 		for (let i = 1; i <=	game.numColors; i++) {
 			index = i - 1;
 			if (this.color.includes(this.guessRowLocation.find(`[data-peg-number = '${i}']`).css("background-color"))) {
 				// console.log("valid color is chosen in position " + i);
-				guess[index] = this.guessRowLocation.find(`[data-peg-number = '${i}']`).css("background-color");
+				this.guess[index] = this.guessRowLocation.find(`[data-peg-number = '${i}']`).css("background-color");
 			} else {
-				guess[index] = false;
-				validGuess = false;
+				this.guess[index] = false;
+				isValidGuess = false;
 			}
 		}
-		// console.log(guess);
-		// console.log(validGuess);
-		if (validGuess) { this.recodeGuess(guess); }
-		// else, do nothing, since guess is not yet complete
+		return isValidGuess;
 	},
 
-	recodeGuess (guess) {
+	recodeGuess () {
 		for (let i = 0; i < this.numColors; i++) {
 			for (let j = 0; j < this.numColors; j++) {
-				if (guess[i] === this.color[j]) {
+				if (this.guess[i] === this.color[j]) {
 					this.guess[i] = j;
 				}
 			}
@@ -187,8 +183,11 @@ $('.colors').on('click', (e) => {
 //   1. the submit button clicked is the one for the current guess row
 //   2. all peg positions have a selected color
 $('.guess-button').on('click', (e) => {
-	game.clearCurrentGuessFormattingOnSubmission(e);
-	game.checkGuess();
+	if ( game.checkGuess(e) ) {
+		game.clearCurrentGuessFormattingOnSubmission(e);
+		game.recodeGuess(); 
+	}
+	// else: do nothing since incorrect submit button was clicked
 })
 
 
