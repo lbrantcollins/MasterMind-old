@@ -2,10 +2,6 @@ body {
 	background-color: lavender;
 }
 
-button {
-
-}
-
 .submit-guess {
 	width: 55px;
 	height: 50px;
@@ -59,7 +55,6 @@ be generated via jQuery during the game */
 	border: 1px solid black;
 }
 
-
 .response {
 	background-color: pink;
 	display: flex;
@@ -74,27 +69,10 @@ be generated via jQuery during the game */
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	border: 1px solid black;
 	width: 18px;
 	height: 18px;
 	border-radius: 50%;
-}
-
-/* The CSS for the response colors will 
-be generated via jQuery during the game */
-#response1 {
-	background-color: red;
-}
-
-#response2 {
-	background-color: blue;
-}
-
-#response3 {
-	background-color: green;
-}
-
-#response4 {
-	background-color: orange;
 }
 
 #color-container {
@@ -116,20 +94,3 @@ be generated via jQuery during the game */
 	border-radius: 50%;
 }
 
-/* The CSS for the available game colors will 
-be generated via jQuery at the start of the game */
-/*#color1 {
-	background-color: purple;
-}
-
-#color2 {
-	background-color: blue;
-}
-
-#color3 {
-	background-color: green;
-}
-
-#color4 {
-	background-color: orange;
-}*/

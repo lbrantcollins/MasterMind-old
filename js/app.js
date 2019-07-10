@@ -10,6 +10,7 @@ const game = {
 	blackPegs: 0,
 	whitePegs: 0,
 	response: [],
+	responseRowLocation: null,
 
 	// player's guess information
 	guess: [],
@@ -35,7 +36,7 @@ const game = {
 		for (let i = 0; i < this.numColors; i++) {
 			this.code[i] = Math.floor( Math.random() * this.numColors );
 		}
-		console.log("the code: ", this.code);
+		// console.log("the code: ", this.code);
 	},
 
 	highlightCurrentGuessPeg (e) {
@@ -63,7 +64,7 @@ const game = {
 			this.color[$(e.target).data().colorNumber]);
 	},
 
-	clearCurrentGuessFormatting(e) {
+	clearCurrentGuessFormattingOnSubmission(e) {
 		this.guessPegLocation.removeClass("current-peg");
 		for (let i = 1; i <=	this.numColors; i++) {
 			this.guessRowLocation.find(`[data-peg-number = '${i}']`).css("border", "none");
@@ -84,15 +85,15 @@ const game = {
 		for (let i = 1; i <=	game.numColors; i++) {
 			index = i - 1;
 			if (this.color.includes(this.guessRowLocation.find(`[data-peg-number = '${i}']`).css("background-color"))) {
-				console.log("valid color is chosen in position " + i);
+				// console.log("valid color is chosen in position " + i);
 				guess[index] = this.guessRowLocation.find(`[data-peg-number = '${i}']`).css("background-color");
 			} else {
 				guess[index] = false;
 				validGuess = false;
 			}
 		}
-		console.log(guess);
-		console.log(validGuess);
+		// console.log(guess);
+		// console.log(validGuess);
 		if (validGuess) { this.recodeGuess(guess); }
 		// else, do nothing, since guess is not yet complete
 	},
@@ -105,11 +106,11 @@ const game = {
 				}
 			}
 		}
-		console.log(this.guess);
-		this.respondToGuess();
+		// console.log(this.guess);
+		this.determineResponseToGuess();
 	},
 
-	respondToGuess () {
+	determineResponseToGuess () {
 		for (let i = 0; i < this.numColors; i++) {
 
 			this.response[i] = 0;
@@ -143,6 +144,15 @@ const game = {
 		console.log("the code:     " +  this.code);
 		console.log("the guess:    " + this.guess);
 		console.log("the response: " + this.response);	
+		this.displayResponseToGuess();
+	},
+
+	displayResponseToGuess () {
+		console.log("the response will be displayed now: " + this.response);
+		this.responseRowLocation = $(`.response[data-response-number = '${this.guessNumber}']`);
+		for (i = 0; i < this.numColors; i++ ) {
+		this.responseRowLocation.find(`[data-peg-number = '${i}']`).css("background-color", this.response[i]);
+		}	
 	}
 
 }
@@ -172,7 +182,7 @@ $('.colors').on('click', (e) => {
 //   1. the submit button clicked is the one for the current guess row
 //   2. all peg positions have a selected color
 $('.guess-button').on('click', (e) => {
-	game.clearCurrentGuessFormatting(e);
+	game.clearCurrentGuessFormattingOnSubmission(e);
 	game.checkGuess();
 })
 
