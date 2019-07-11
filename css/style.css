@@ -140,3 +140,12 @@ body {
 	border-radius: 50%;
 }
 
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+
+.blink {
+  animation: blinker 0.5s linear infinite;
+}
+
+

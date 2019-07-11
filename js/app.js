@@ -4,11 +4,15 @@ const game = {
 	// game size (4, 6, 8) and all available colors
 	numColors: null,
 	color: ["rgb(255, 99, 71)", "rgb(65, 105, 225)", "rgb(60, 179, 113)", "rgb(255, 165, 0)", "purple", "pink", "yellow", "teal"],
+	
+	// player statistics
+	wins: 0,
+	losses: 0,
+	minScore: 10,
+	maxScore: 1,
 
 	// computer code and response
 	code: [],
-	blackPegs: 0,
-	whitePegs: 0,
 	response: [],
 	responseRowLocation: null,
 
@@ -36,11 +40,7 @@ const game = {
 		for (let i = 0; i < this.numColors; i++) {
 			this.code[i] = Math.floor( Math.random() * this.numColors );
 		}
-		// ***************
-		// move this to the end of the game
-		// ***************
-		this.revealCode();
-
+		console.log("code: ", this.code);
 	},
 
 	highlightCurrentGuessPeg (e) {
@@ -68,8 +68,10 @@ const game = {
 	},
 
 	colorCurrentGuessPeg (e) {
-		this.guessPegLocation.css("background-color", 
-			this.color[$(e.target).data().colorNumber]);
+		if (this.guessPegLocation !== null) {
+			this.guessPegLocation.css("background-color", 
+				this.color[$(e.target).data().colorNumber]);
+		}	// else, do nothing (if game only just started and no peg is selected)
 	},
 
 	clearCurrentGuessFormattingOnSubmission(e) {
@@ -80,7 +82,7 @@ const game = {
 	},
 
 
-	checkGuess (e) {
+	checkGuessValid (e) {
 		// check that all peg positions have a selected color
 
 		this.guessRowLocation = $(`.guess[data-guess-number = '${game.guessNumber}']`);
@@ -111,21 +113,21 @@ const game = {
 	},
 
 	determineResponseToGuess () {
+		let score = 0;
 		for (let i = 0; i < this.numColors; i++) {
-
 			this.response[i] = 0;
 			// Look for correct color-and-position matches 
 			if (this.guess[i] === this.code[i]) {
-				this.blackPegs++;
 				this.response[i] = 2;
+				score++;
 			} else 
 
 			// Look for correct color-only matches
 			if (this.code.includes(this.guess[i])) {
-				this.whitePegs++;
 				this.response[i] = 1;
 			}			
 		}
+
 		// sort response in descending order for ease of output
 		// 2 = black, 1 = white, 0 = no response
 		this.response.sort( function(a, b) { return b - a } );
@@ -145,6 +147,8 @@ const game = {
 		console.log("the guess:    " + this.guess);
 		console.log("the response: " + this.response);	
 		this.displayResponseToGuess();
+		this.checkGameStatus(score);
+		this.goToNextGuess();
 	},
 
 	displayResponseToGuess () {
@@ -153,11 +157,31 @@ const game = {
 		for (i = 0; i < this.numColors; i++ ) {
 		this.responseRowLocation.find(`[data-peg-number = '${i}']`).css("background-color", this.response[i]);
 		}	
-		this.goToNextGuess();
 	},
 
 	goToNextGuess () {
 		this.guessNumber++;
+	},
+
+	checkGameStatus(score) {
+		if (score === this.numColors) {
+			this.revealCode();
+			this.blinkCorrectGuess();
+			this.wins++;
+			if (this.guessNumber > this.maxScore) {
+				this.maxScore = this.guessNumber;
+			}
+			if (this.guessNumber < this.minScore) {
+				this.minScore = this.guessNumber;
+			}
+		} else if (this.guessNumber === 10) {
+			this.revealCode();
+			this.losses++;
+		}
+		if ( (score === this.numColors) 
+				|| (this.guessNumber === 10) ) {
+		this.updateScoreBoard();
+		}
 	},
 
 	revealCode () {
@@ -166,6 +190,20 @@ const game = {
 			codeDiv.find(`[data-color-number = '${i}']`).css("background-color", this.color[this.code[i]]);
 		}
 	},
+
+	updateScoreBoard () {
+		console.log("inside updateScoreBoard");
+		$('#wins').text(`Wins: ${this.wins}`);
+		$('#losses').text(`Losses: ${this.losses}`);
+		$('#lowest').text(`Lowest Score: ${this.minScore}`);
+		$('#highest').text(`Highest Score: ${this.maxScore}`);
+	},
+
+	blinkCorrectGuess () {
+		for (let i = 1; i <=	this.numColors; i++) {
+			this.guessRowLocation.find(`[data-peg-number = '${i}']`).addClass("blink");
+		}
+	}
 
 
 }
@@ -195,7 +233,7 @@ $('.colors').on('click', (e) => {
 //   1. the submit button clicked is the one for the current guess row
 //   2. all peg positions have a selected color
 $('.guess-button').on('click', (e) => {
-	if ( game.checkGuess(e) ) {
+	if ( game.checkGuessValid(e) ) {
 		game.clearCurrentGuessFormattingOnSubmission(e);
 		game.recodeGuess(); 
 	}
