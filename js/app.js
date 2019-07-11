@@ -6,9 +6,10 @@ const game = {
 	color: ["rgb(255, 99, 71)", "rgb(65, 105, 225)", "rgb(60, 179, 113)", "rgb(255, 165, 0)", "purple", "pink", "yellow", "teal"],
 	
 	// player statistics
+	gameNumber: 1,
 	wins: 0,
 	losses: 0,
-	minScore: 10,
+	minScore: 3,
 	maxScore: 1,
 
 	// computer code and response
@@ -168,19 +169,20 @@ const game = {
 			this.revealCode();
 			this.blinkCorrectGuess();
 			this.wins++;
+		} else if (this.guessNumber === 3) {
+			this.revealCode();
+			this.blinkCodeUponLosingGame();
+			this.losses++;
+		}
+		if ( (score === this.numColors) 
+				|| (this.guessNumber === 3) ) {
 			if (this.guessNumber > this.maxScore) {
 				this.maxScore = this.guessNumber;
 			}
 			if (this.guessNumber < this.minScore) {
 				this.minScore = this.guessNumber;
 			}
-		} else if (this.guessNumber === 10) {
-			this.revealCode();
-			this.losses++;
-		}
-		if ( (score === this.numColors) 
-				|| (this.guessNumber === 10) ) {
-		this.updateScoreBoard();
+			this.updateScoreBoard();
 		}
 	},
 
@@ -195,14 +197,38 @@ const game = {
 		console.log("inside updateScoreBoard");
 		$('#wins').text(`Wins: ${this.wins}`);
 		$('#losses').text(`Losses: ${this.losses}`);
-		$('#lowest').text(`Lowest Score: ${this.minScore}`);
-		$('#highest').text(`Highest Score: ${this.maxScore}`);
+		if ( !( (this.gameNumber === 1) && (this.losses === 1) ) ) {
+			$('#lowest').text(`Lowest Score: ${this.minScore}`);
+			$('#highest').text(`Highest Score: ${this.maxScore}`);
+		}
 	},
 
 	blinkCorrectGuess () {
 		for (let i = 1; i <=	this.numColors; i++) {
 			this.guessRowLocation.find(`[data-peg-number = '${i}']`).addClass("blink");
 		}
+	},
+
+	blinkCodeUponLosingGame () {
+		for (let i = 0; i < this.numColors; i++) {
+			$('#code-container').find(`[data-color-number = '${i}']`).addClass("blink");
+		}
+	},
+
+	gameResetReplay () {
+		for (let i = 1; i <=	this.numColors; i++) {
+			this.guessRowLocation.find(`[data-peg-number = '${i}']`).removeClass("blink");
+		}
+		for (let i = 0; i < this.numColors; i++) {
+			$('#code-container').find(`[data-color-number = '${i}']`).removeClass("blink");
+			$('#code-container').find(`[data-color-number = '${i}']`).css("background-color", "#dbceb0");
+		}
+		// blank out all of the guess colors and response colors from prior game
+		$('.guess-pegs').css("background-color", "#cab577");
+		// $('.guess-pegs').css("border", "1px solid black");
+		$('.response-pegs').css("background-color", "#cab577");
+		this.guessNumber = 1;
+		this.startGame();
 	}
 
 
@@ -238,6 +264,11 @@ $('.guess-button').on('click', (e) => {
 		game.recodeGuess(); 
 	}
 	// else: do nothing since incorrect submit button was clicked
+})
+
+// listen for the play-again button
+$('#play-again').on('click', (e) => {
+	game.gameResetReplay();
 })
 
 
