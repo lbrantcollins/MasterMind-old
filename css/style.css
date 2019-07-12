@@ -2,6 +2,20 @@ body {
 	background-color: #dbceb0;
 }
 
+.button {
+	background-color: #838060
+	border-color: #838060;
+}
+
+.button:active {
+	background-color: #7e4a35;
+	border-color: #cab577;
+}
+
+.button:hover {
+	background-color: #838060
+}
+
 /*.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: #838060 !important;
 }*/
@@ -13,7 +27,13 @@ body {
 .btn-primary:focus {
     background-color: #838060;
     border-color: #838060;
+    background-color: #cab577;
 }
+
+.btn-primary:focus, .btn-primary.focus {
+  box-shadow: 0 0 0 3px #cab577;
+}
+
 
 #overall-container {
 	background-color: none;

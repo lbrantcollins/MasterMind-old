@@ -9,7 +9,7 @@ const game = {
 	gameNumber: 1,
 	wins: 0,
 	losses: 0,
-	minScore: 3,
+	minScore: 5,
 	maxScore: 1,
 
 	// computer code and response
@@ -169,13 +169,13 @@ const game = {
 			this.revealCode();
 			this.blinkCorrectGuess();
 			this.wins++;
-		} else if (this.guessNumber === 3) {
+		} else if (this.guessNumber === 5) {
 			this.revealCode();
 			this.blinkCodeUponLosingGame();
 			this.losses++;
 		}
 		if ( (score === this.numColors) 
-				|| (this.guessNumber === 3) ) {
+				|| (this.guessNumber === 5) ) {
 			if (this.guessNumber > this.maxScore) {
 				this.maxScore = this.guessNumber;
 			}
