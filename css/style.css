@@ -27,7 +27,6 @@ body {
 .btn-primary:focus {
     background-color: #838060;
     border-color: #838060;
-    background-color: #cab577;
 }
 
 .btn-primary:focus, .btn-primary.focus {
