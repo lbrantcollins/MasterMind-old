@@ -16,6 +16,7 @@ const game = {
 	gameNumber: 1,
 	wins: 0,
 	losses: 0,
+	maxGuessesAllowed: 5,
 	minScore: 5,
 	maxScore: 1,
 
@@ -169,13 +170,13 @@ const game = {
 			this.revealCode();
 			this.blinkCorrectGuess();
 			this.wins++;
-		} else if (this.guessNumber === 5) {
+		} else if (this.guessNumber === this.maxGuessesAllowed) {
 			this.revealCode();
 			this.blinkCodeUponLosingGame();
 			this.losses++;
 		}
 		if ( (score === this.numColors) 
-				|| (this.guessNumber === 5) ) {
+				|| (this.guessNumber === this.maxGuessesAllowed) ) {
 			if (this.guessNumber > this.maxScore) {
 				this.maxScore = this.guessNumber;
 			}
@@ -196,10 +197,10 @@ const game = {
 	updateScoreBoard () {
 		$('#wins').text(`Wins: ${this.wins}`);
 		$('#losses').text(`Losses: ${this.losses}`);
-		if ( !( (this.gameNumber === 1) && (this.losses === 1) ) ) {
+		// if ( !( (this.gameNumber === 1) && (this.losses === 1) ) ) {
 			$('#lowest').text(`Lowest Score: ${this.minScore}`);
 			$('#highest').text(`Highest Score: ${this.maxScore}`);
-		}
+		// }
 	},
 
 	blinkCorrectGuess () {
