@@ -1,4 +1,11 @@
+
 console.log("Welcome to the world of Master Mind!");
+
+// NOTE: I used the "datasets" feature of HTML to identify DOM nodes
+// (rather than a unique ID for all 80 pegs on the game board)
+// Example HTML:  <div class="color-pegs" data-color-number="1"></div>
+// Example JQuery to access dataset "colorNumber" i (after parent div located):
+// parentDiv.find(`[data-color-number = '${i}']`)
 
 const game = {
 	// game size (4, 6, 8) and all available colors
@@ -12,7 +19,7 @@ const game = {
 	minScore: 5,
 	maxScore: 1,
 
-	// computer code and response
+	// computer secret code and response
 	code: [],
 	response: [],
 	responseRowLocation: null,
@@ -24,7 +31,7 @@ const game = {
 	guessPegLocation: null,
 
 	startGame () {
-		this.numColors = 4;									//*** Let user choose number of colors
+		this.numColors = 4;   //*** FUTURE FEATURE: Let user choose # of colors
 		this.displayAvailableColors();
 		this.generateCode();
 	},	
@@ -49,7 +56,7 @@ const game = {
 		if ( e.currentTarget.dataset.guessNumber == this.guessNumber ) {
 
 			// find the current guess peg via event delegation
-			// 1. find particular guess row div using html .guess class data (guess-number)		
+			// 1. find particular guess row div using html .guess class data (guess-number)
 			this.guessRowLocation = $(`.guess[data-guess-number = '${this.guessNumber}']`);
 			// 2. find the peg in the .guess div using html data (peg-number)
 			this.guessPegLocation = this.guessRowLocation.find( 
@@ -91,7 +98,6 @@ const game = {
 		for (let i = 1; i <=	game.numColors; i++) {
 			index = i - 1;
 			if (this.color.includes(this.guessRowLocation.find(`[data-peg-number = '${i}']`).css("background-color"))) {
-				// console.log("valid color is chosen in position " + i);
 				this.guess[index] = this.guessRowLocation.find(`[data-peg-number = '${i}']`).css("background-color");
 			} else {
 				this.guess[index] = false;
@@ -109,7 +115,6 @@ const game = {
 				}
 			}
 		}
-		// console.log(this.guess);
 		this.determineResponseToGuess();
 	},
 
@@ -132,7 +137,6 @@ const game = {
 		// sort response in descending order for ease of output
 		// 2 = black, 1 = white, 0 = no response
 		this.response.sort( function(a, b) { return b - a } );
-		// console.log("the response: ", this.response);
 
 		// re-code the response as values for CSS "background-color" property
 		for (let i = 0; i < this.numColors; i++) {
@@ -144,16 +148,12 @@ const game = {
 				this.response[i] = "none";
 			}
 		}
-		console.log("the code:     " +  this.code);
-		console.log("the guess:    " + this.guess);
-		console.log("the response: " + this.response);	
 		this.displayResponseToGuess();
 		this.checkGameStatus(score);
 		this.goToNextGuess();
 	},
 
 	displayResponseToGuess () {
-		console.log("the response will be displayed now: " + this.response);
 		this.responseRowLocation = $(`.response[data-response-number = '${this.guessNumber}']`);
 		for (i = 0; i < this.numColors; i++ ) {
 		this.responseRowLocation.find(`[data-peg-number = '${i}']`).css("background-color", this.response[i]);
@@ -194,7 +194,6 @@ const game = {
 	},
 
 	updateScoreBoard () {
-		console.log("inside updateScoreBoard");
 		$('#wins').text(`Wins: ${this.wins}`);
 		$('#losses').text(`Losses: ${this.losses}`);
 		if ( !( (this.gameNumber === 1) && (this.losses === 1) ) ) {
